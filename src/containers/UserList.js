@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {getListUsers} from "../api";
 import NamesList from "../components/NamesList";
-import UserInfoModal from "../containers/userInfoModal";
+import UserInfoModal from "./UserInfoModal";
 
 const UserList = () => {
   const [userList, setUserList] = useState([])
-  const [userInfo, setUserInfo] = useState({})
+  const [userInfo, setUserInfo] = useState(null)
   const [userInfoModalIsVisible, setUserInfoModalIsVisible] = useState(false)
 
   const hideUserinfoModal = () => {
@@ -37,7 +37,7 @@ const UserList = () => {
         <NamesList items={userList} template={userTemplate}/>
       }
       <UserInfoModal
-        userId={userInfo.id}
+        userId={userInfo?.id}
         isVisible={userInfoModalIsVisible}
         onHide={hideUserinfoModal}
       />

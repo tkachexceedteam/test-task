@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {getSingleUser} from "../api";
 
 const UserInfoModal = ({userId, onHide, isVisible}) => {
-  const [userInfo, setUserInfo] = useState({})
+  const [userInfo, setUserInfo] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {

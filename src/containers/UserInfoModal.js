@@ -13,29 +13,42 @@ const UserInfoModal = ({userId, onHide, isVisible}) => {
         .then(res => {
           setUserInfo(res.data)
         })
+        .catch(e => console.error(e))
         .finally(() => {
           setIsLoading(false)
         })
     }
-  }, [isVisible])
+  }, [isVisible, userId])
 
   return (
     <>
       {userInfo &&
-        <Modal centered show={isVisible} onHide={onHide}>
+        <Modal
+          centered
+          show={isVisible}
+          onHide={onHide}
+        >
           <Modal.Header closeButton>
-            <Modal.Title>User info</Modal.Title>
+            <Modal.Title>
+              <i className="bi bi-person-fill text-primary"/>
+              User info
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {!isLoading &&
               <Container>
                 <Row>
                   <Col md={'auto'}>
-                    <Image src={userInfo.avatar} height={'100px'} width={'100px'} alt={'avatar'} />
+                    <Image src={userInfo.avatar} height={'200px'} width={'200px'} alt={'avatar'} />
                   </Col>
                   <Col>
-                    <Row>Name: {userInfo.first_name} {userInfo.last_name}</Row>
-                    <Row>email: {userInfo.email}</Row>
+                    <p>
+                      <span className={''}>
+                        NAME:
+                      </span>
+                      {' '}{userInfo.first_name} {userInfo.last_name}
+                    </p>
+                    <p>EMAIL: {userInfo.email}</p>
                 </Col>
                 </Row>
               </Container>

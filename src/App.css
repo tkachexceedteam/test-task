@@ -2,6 +2,13 @@
   cursor: pointer;
 }
 
+body {
+  width: 100vw;
+  height: 100vh;
+  background: bottom fixed url("https://catherineasquithgallery.com/uploads/posts/2021-02/1613250170_141-p-skachat-sine-belii-fon-208.jpg");
+  background-size: cover;
+}
+
 .App {
   text-align: center;
 }

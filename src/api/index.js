@@ -2,8 +2,8 @@ import axios from "axios";
 
 const URL = 'https://reqres.in/api/users'
 
-export const getListUsers = (page) => {
-  return axios.get(`${URL}?page=${page}`)
+export const getListUsers = (page, size) => {
+  return axios.get(`${URL}?page=${page}&per_page=${size}`)
     .then((res) => res.data);
 }
 

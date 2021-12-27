@@ -1,6 +1,6 @@
 import {Container, Dropdown, Pagination} from "react-bootstrap";
 
-const Paginator = ({page, pageSize, totalPages, onChange}) => {
+const Paginator = ({page, pageSize, totalPages, onChange, perPageParams}) => {
   const nextPage = () => {
     onChange({page: page + 1, pageSize})
   }
@@ -69,7 +69,7 @@ const Paginator = ({page, pageSize, totalPages, onChange}) => {
 
         {items}
 
-        {totalPages > 5 &&
+        {totalPages > 5 && (
           <>
             <Pagination.Next
               onClick={nextPage}
@@ -80,23 +80,30 @@ const Paginator = ({page, pageSize, totalPages, onChange}) => {
               onClick={lastPage}
             />
           </>
-        }
+        )}
       </Pagination>
       {totalPages > 5 &&
         <p>Total pages: {totalPages}</p>
       }
-      <Dropdown>
-        <Dropdown.Toggle>
-          Items per page: {pageSize}
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item onClick={() => perPageChange(2)}>2</Dropdown.Item>
-          <Dropdown.Item onClick={() => perPageChange(4)}>4</Dropdown.Item>
-          <Dropdown.Item onClick={() => perPageChange(6)}>6</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+      {perPageParams && (
+        <Dropdown>
+          <Dropdown.Toggle>
+            Items per page: {pageSize}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            {perPageParams.map(item => {
+              return (
+                <Dropdown.Item onClick={() => perPageChange(item.value)}>{item.label}</Dropdown.Item>
+              )
+            })}
+          </Dropdown.Menu>
+        </Dropdown>
+      )}
     </Container>
   );
 }
+
+
 
 export default Paginator

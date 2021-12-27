@@ -11,6 +11,20 @@ const UserList = () => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(4)
   const [userInfoModalIsVisible, setUserInfoModalIsVisible] = useState(false)
+  const perPageParams = [
+    {
+      label: 'Two',
+      value: 2,
+    },
+    {
+      label: 'Four',
+      value: 4,
+    },
+    {
+      label: 'Six',
+      value: 6
+    }
+  ]
 
   const hideUserinfoModal = () => {
     setUserInfoModalIsVisible(false)
@@ -29,42 +43,43 @@ const UserList = () => {
       .catch(e => console.error(e))
   },[page, pageSize])
 
-  const userTemplate = (userData) => {
+  const userItemTemplate = (userData) => {
     const onUserClick = () => {
       setUserInfo(userData)
       setUserInfoModalIsVisible(true)
     }
 
     return (
-      <div onClick={onUserClick}>
+      <div className={'clickable'} onClick={onUserClick}>
         {userData.first_name} {userData.last_name}
       </div>)
   }
 
   return (
     <>
-      {userListFetchedData &&
+      {userListFetchedData && (
         <Container className={'col-lg-6'}>
           <h1>
             <i className="bi bi-people-fill text-primary"/> User list
           </h1>
-          <NamesList items={userListFetchedData.data} template={userTemplate}/>
+          <NamesList items={userListFetchedData.data} template={userItemTemplate}/>
           <br />
           <Paginator
             page={page}
             onChange={onPageChange}
             pageSize={pageSize}
+            perPageParams={perPageParams}
             totalPages={userListFetchedData.total_pages}
           />
         </Container>
-      }
-      {userInfo &&
+      )}
+      {userInfo && (
         <UserInfoModal
           userId={userInfo.id}
           isVisible={userInfoModalIsVisible}
           onHide={hideUserinfoModal}
         />
-      }
+      )}
     </>
   )
 }

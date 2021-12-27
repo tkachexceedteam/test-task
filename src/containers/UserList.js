@@ -13,17 +13,21 @@ const UserList = () => {
   const [userInfoModalIsVisible, setUserInfoModalIsVisible] = useState(false)
   const perPageParams = [
     {
-      label: 'Two',
+      label: '2',
       value: 2,
     },
     {
-      label: 'Four',
+      label: '4',
       value: 4,
     },
     {
-      label: 'Six',
+      label: '6',
       value: 6
-    }
+    },
+    {
+      label: '12',
+      value: 12
+    },
   ]
 
   const hideUserinfoModal = () => {
